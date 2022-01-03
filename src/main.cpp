@@ -1,3 +1,4 @@
+#include <cmath>
 #include <complex>
 #include <fstream>
 
@@ -25,8 +26,8 @@ int main() {
 
     for (auto y = height - 1; y >= 0; --y) {
         for (auto x = 0; x < width; ++x) {
-            auto real = static_cast<double>(x) / (width - 1) * 3 - 2;
-            auto imag = static_cast<double>(y) / (height - 1) * 2 - 1;
+            auto real = std::lerp(-2.0, 0.47, static_cast<double>(x) / (width - 1));
+            auto imag = std::lerp(-1.12, 1.12, static_cast<double>(y) / (height - 1));
 
             auto color = mandelbrot({real, imag});
             image << static_cast<int>(color * 255) << ' ';
