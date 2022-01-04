@@ -30,17 +30,20 @@ int main() {
 
     for (auto y = height - 1; y >= 0; --y) {
         for (auto x = 0; x < width; ++x) {
-            auto real = std::lerp(-2, 1, static_cast<double>(x) / (width - 1));
-            auto imag = std::lerp(-1, 1, static_cast<double>(y) / (height - 1));
+            auto r = std::lerp(-2, 1, static_cast<double>(x) / (width - 1));
+            auto i = std::lerp(-1, 1, static_cast<double>(y) / (height - 1));
 
-            auto color = mandelbrot({real, imag});
-            auto hue = color * 255;
-            auto sat = 255;
-            auto val = hue < 1 ? 255 : 0;
+            auto m = mandelbrot({r, i});
             
-            image << static_cast<int>(hue) << ' ';
-            image << static_cast<int>(sat) << ' ';
-            image << static_cast<int>(val) << ' ';
+            auto h = m * 255;
+            auto s = 255;
+            auto v = hue < 1 ? 255 : 0;
+            
+            color_rgb color = color_hsv(h, s, v);
+
+            image << static_cast<int>(color.r * 255) << ' ';
+            image << static_cast<int>(color.g * 255) << ' ';
+            image << static_cast<int>(color.b * 255) << ' ';
         }
         image << '\n';
     }

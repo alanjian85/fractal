@@ -2,8 +2,10 @@
 #define FRACTAL_COLOR_HSV_HPP
 
 namespace fractal {
-    class color_hsv {
-
+    struct color_hsv {
+        double h;
+        double s;
+        double v;
     };
 }
 

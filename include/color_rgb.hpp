@@ -2,8 +2,10 @@
 #define FRACTAL_COLOR_RGB_HPP
 
 namespace fractal {
-    class color_rgb {
-
+    struct color_rgb {
+        double r;
+        double g;
+        double b;
     };
 }
 
