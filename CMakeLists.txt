@@ -8,3 +8,4 @@ set(FRACTAL_SOURCES
     src/main.cpp)
 
 add_executable(fractal ${FRACTAL_SOURCES})
+target_include_directories(fractal PRIVATE include)

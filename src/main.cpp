@@ -2,6 +2,10 @@
 #include <complex>
 #include <fstream>
 
+#include "color_rgb.hpp"
+#include "color_hsv.hpp"
+using namespace fractal;
+
 constexpr auto max_iteration = 50;
 
 constexpr auto mandelbrot(std::complex<double> c) noexcept {
