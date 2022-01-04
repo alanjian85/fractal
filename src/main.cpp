@@ -20,7 +20,7 @@ int main() {
     const int height = 600;
 
     std::ofstream image("image.ppm");
-    image << "P2\n";
+    image << "P3\n";
     image << width << ' ' << height << '\n';
     image << "255\n";
 
@@ -30,7 +30,13 @@ int main() {
             auto imag = std::lerp(-1, 1, static_cast<double>(y) / (height - 1));
 
             auto color = mandelbrot({real, imag});
-            image << static_cast<int>(color * 255) << ' ';
+            auto hue = color * 255;
+            auto sat = 255;
+            auto val = hue < 1 ? 255 : 0;
+            
+            image << static_cast<int>(hue) << ' ';
+            image << static_cast<int>(sat) << ' ';
+            image << static_cast<int>(val) << ' ';
         }
         image << '\n';
     }
