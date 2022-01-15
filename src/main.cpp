@@ -6,9 +6,9 @@
 #include "color_hsv.hpp"
 using namespace fractal;
 
-constexpr auto max_iteration = 50;
-
 constexpr auto mandelbrot(std::complex<double> c) noexcept {
+    constexpr auto max_iteration = 50;
+
     std::complex<double> z;
     auto i = 0;
     for (i = 0; i < max_iteration; ++i) {
@@ -36,9 +36,9 @@ int main() {
             auto m = mandelbrot({r, i});
             
             color_hsv hsv;
-            hsv.h = m * 255;
-            hsv.s = 255;
-            hsv.v = hsv.h < 1 ? 255 : 0;
+            hsv.h = m;
+            hsv.s = 1;
+            hsv.v = m < 1 ? 1 : 0;
             
             color_rgb color = hsv;
 
