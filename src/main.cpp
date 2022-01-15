@@ -7,7 +7,7 @@
 #include "framebuffer.hpp"
 using namespace fractal;
 
-constexpr auto mandelbrot(std::complex<double> c) noexcept {
+auto mandelbrot(std::complex<double> c) noexcept {
     constexpr auto max_iteration = 50;
 
     std::complex<double> z;
@@ -17,7 +17,7 @@ constexpr auto mandelbrot(std::complex<double> c) noexcept {
             break;
         z = z * z + c;
     }
-    return static_cast<double>(i) / max_iteration;
+    return (i + 1 - std::log(std::log2(std::abs(z)))) / (max_iteration - 1);
 }
 
 int main() {
