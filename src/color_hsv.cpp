@@ -7,20 +7,20 @@ using namespace fractal;
 
 color_hsv::operator color_rgb() const noexcept {
     color_rgb rgb;
-    double h = this->h, s = this->s, v = this->v;
+    double h = this->h * 360, s = this->s, v = this->v;
 
-    if (h == 360.0) {
+    if (h == 360) {
         h = 0;
     } else {
         h /= 60;
     }
     auto fract = h - std::floor(h);
 
-    auto p = v * (1. - s);
-    auto q = v * (1. - s * fract);
-    auto t = v * (1. - s * (1. - fract));
+    auto p = v * (1 - s);
+    auto q = v * (1 - s * fract);
+    auto t = v * (1 - s * (1 - fract));
 
-    if (0. <= h && h < 1.)
+    if (0 <= h && h < 1)
         rgb = {v, t, p};
     else if (1 <= h && h < 2)
         rgb = {q, v, p};
