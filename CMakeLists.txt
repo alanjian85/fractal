@@ -5,7 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(FRACTAL_SOURCES
-    src/main.cpp)
+    src/main.cpp
+    src/color_hsv.cpp)
 
 add_executable(fractal ${FRACTAL_SOURCES})
 target_include_directories(fractal PRIVATE include)

@@ -35,11 +35,12 @@ int main() {
 
             auto m = mandelbrot({r, i});
             
-            auto h = m * 255;
-            auto s = 255;
-            auto v = hue < 1 ? 255 : 0;
+            color_hsv hsv;
+            hsv.h = m * 255;
+            hsv.s = 255;
+            hsv.v = hsv.h < 1 ? 255 : 0;
             
-            color_rgb color = color_hsv(h, s, v);
+            color_rgb color = hsv;
 
             image << static_cast<int>(color.r * 255) << ' ';
             image << static_cast<int>(color.g * 255) << ' ';
