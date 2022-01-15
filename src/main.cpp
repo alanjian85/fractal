@@ -4,6 +4,7 @@
 
 #include "color_rgb.hpp"
 #include "color_hsv.hpp"
+#include "framebuffer.hpp"
 using namespace fractal;
 
 constexpr auto mandelbrot(std::complex<double> c) noexcept {
@@ -24,14 +25,12 @@ int main() {
     const int height = 600;
 
     std::ofstream image("image.ppm");
-    image << "P3\n";
-    image << width << ' ' << height << '\n';
-    image << "255\n";
+    framebuffer fb(width, height);
 
-    for (auto y = height - 1; y >= 0; --y) {
-        for (auto x = 0; x < width; ++x) {
+    for (framebuffer::size_type y = 0; y < height; ++y) {
+        for (framebuffer::size_type x = 0; x < width; ++x) {
             auto r = std::lerp(-2, 1, static_cast<double>(x) / (width - 1));
-            auto i = std::lerp(-1, 1, static_cast<double>(y) / (height - 1));
+            auto i = std::lerp(-1, 1, 1 - static_cast<double>(y) / (height - 1));
 
             auto m = mandelbrot({r, i});
             
@@ -40,12 +39,10 @@ int main() {
             hsv.s = 1;
             hsv.v = m < 1 ? 1 : 0;
             
-            color_rgb color = hsv;
-
-            image << static_cast<int>(color.r * 255) << ' ';
-            image << static_cast<int>(color.g * 255) << ' ';
-            image << static_cast<int>(color.b * 255) << ' ';
+            fb(x, y) = hsv;
         }
-        image << '\n';
     }
+
+    image << fb;
+    return 0;
 }
